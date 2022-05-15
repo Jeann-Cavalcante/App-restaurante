@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import logoImg from "../../../public/logo.svg";
 import styles from "../../../styles/Home.module.scss";
@@ -22,7 +23,7 @@ export default function Signup() {
     event.preventDefault();
 
     if (email === "" || password === "" || name === "") {
-      alert("Preencha os dados");
+      toast.warning("Preencha os dados");
       return;
     }
 

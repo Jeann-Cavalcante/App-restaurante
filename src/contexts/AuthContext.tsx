@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useState } from "react";
-import { destroyCookie, setCookie, parseCookies } from "nookies";
 import Router from "next/router";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, ReactNode, useState } from "react";
+
 import { api } from "../services/apiClient";
 
 type AuthContextData = {
@@ -8,6 +9,7 @@ type AuthContextData = {
   isAuthenticated: boolean;
   signIn: (credentials: SingInProps) => Promise<void>;
   signOut: () => void;
+  signUp: (credentials: SignUpProps) => Promise<void>;
 };
 
 type UserProps = {
@@ -17,6 +19,12 @@ type UserProps = {
 };
 
 type SingInProps = {
+  email: string;
+  password: string;
+};
+
+type SignUpProps = {
+  name: string;
   email: string;
   password: string;
 };
@@ -70,8 +78,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signUp({ name, email, password }: SignUpProps) {
+    try {
+      const response = await api.post("/users", {
+        name,
+        email,
+        password,
+      });
+
+      console.log("Cadastro com sucesso");
+
+      Router.push("/");
+    } catch (err) {
+      console.log("Erro ao acessa", err);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signIn, signOut, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   );

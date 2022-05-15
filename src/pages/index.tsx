@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { useContext, FormEvent, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FormEvent, useContext, useState } from "react";
 
 import logoImg from "../../public/logo.svg";
 import styles from "../../styles/Home.module.scss";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/input";
-import Link from "next/link";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
@@ -20,11 +20,20 @@ export default function Home() {
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
 
+    if (email === "" || password === "") {
+      alert("Preencha os dados");
+      return;
+    }
+
+    setLoading(true);
+
     let data = {
       email,
       password,
     };
     await signIn(data);
+
+    setLoading(false);
   }
 
   return (
@@ -49,7 +58,7 @@ export default function Home() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" loading={false}>
+            <Button type="submit" loading={loading}>
               Acessar
             </Button>
           </form>

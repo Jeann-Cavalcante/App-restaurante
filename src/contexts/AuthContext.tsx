@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { api } from "../services/apiClient";
@@ -48,6 +48,30 @@ export function signOut() {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user; //!! transforma em boolean
+
+  useEffect(() => {
+    // tentar pegar algo no cookie
+    const { "@nextauth.token": token } = parseCookies();
+
+    if (token) {
+      api
+        .get("/me")
+        .then((response) => {
+          const { id, name, email } = response.data;
+
+          setUser({
+            id,
+            name,
+            email,
+          });
+        })
+        .catch(() => {
+          //Se eu erro deslogamos o user
+          signOut();
+        });
+    }
+  }, []);
+
   async function signIn({ email, password }: SingInProps) {
     try {
       const response = await api.post("/session", {
@@ -90,7 +114,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
 
-      toast.success("Cadastro com sucesso");
+      toast.success("Cadastro realizado com sucesso");
 
       Router.push("/");
     } catch (err) {

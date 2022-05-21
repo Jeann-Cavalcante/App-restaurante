@@ -11,6 +11,7 @@ type AuthContextData = {
   signIn: (credentials: SingInProps) => Promise<void>;
   signOut: () => void;
   signUp: (credentials: SignUpProps) => Promise<void>;
+  category: (Credential: categoryProps) => Promise<void>;
 };
 
 type UserProps = {
@@ -32,6 +33,10 @@ type SignUpProps = {
 
 type AuthProviderProps = {
   children: ReactNode;
+};
+
+type categoryProps = {
+  name: string;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -123,9 +128,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function category(name: categoryProps) {
+    try {
+      const response = await api.post("/category", name);
+      toast.success("Cadastro realizado com sucesso");
+      Router.push("/");
+    } catch (err) {
+      toast.error("Erro ao cadastrar");
+      console.log("Erro ao cadastrar", err);
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signIn, signOut, signUp }}
+      value={{ user, isAuthenticated, signIn, signOut, signUp, category }}
     >
       {children}
     </AuthContext.Provider>

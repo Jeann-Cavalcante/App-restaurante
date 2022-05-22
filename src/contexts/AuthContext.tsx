@@ -11,7 +11,7 @@ type AuthContextData = {
   signIn: (credentials: SingInProps) => Promise<void>;
   signOut: () => void;
   signUp: (credentials: SignUpProps) => Promise<void>;
-  category: (Credential: categoryProps) => Promise<void>;
+  category: (credential: categoryProps) => Promise<void>;
 };
 
 type UserProps = {

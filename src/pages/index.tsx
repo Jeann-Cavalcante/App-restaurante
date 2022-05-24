@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
+import { AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 import logoImg from "../../public/logo.svg";
@@ -54,12 +55,21 @@ export default function Home() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Input
-              placeholder="Digite sua senha"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className={styles.inpuntPassword}>
+              <Input
+                placeholder="Digite sua senha"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <AiOutlineEye
+                width={30}
+                height={30}
+                className={styles.icon}
+                color="#FFF"
+              />
+            </div>
+
             <Button type="submit" loading={loading}>
               Acessar
             </Button>

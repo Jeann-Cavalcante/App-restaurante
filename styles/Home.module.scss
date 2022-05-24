@@ -39,8 +39,31 @@
   cursor: pointer;
 }
 
+.inpuntPassword {
+  display: flex;
+  position: relative;
+  height: 40px;
+  align-items: center;
+  justify-self: center;
+  margin-bottom: 1rem;
+
+  input {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .icon {
+    position: absolute;
+    right: 2%;
+  }
+}
+
 @media (max-width: 620px) {
   .login {
     width: 90%;
+  }
+
+  .text {
+    font-size: 0.9rem;
   }
 }

@@ -19,6 +19,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState("password");
 
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
@@ -37,6 +38,14 @@ export default function Home() {
     await signIn(data);
 
     setLoading(false);
+  }
+
+  function activePassword() {
+    if (active === "password") {
+      setActive("text");
+    } else {
+      setActive("password");
+    }
   }
 
   return (
@@ -58,7 +67,7 @@ export default function Home() {
             <div className={styles.inpuntPassword}>
               <Input
                 placeholder="Digite sua senha"
-                type="password"
+                type={active}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -67,6 +76,8 @@ export default function Home() {
                 height={30}
                 className={styles.icon}
                 color="#FFF"
+                // onClick={() => setActive("password")}
+                onClick={activePassword}
               />
             </div>
 

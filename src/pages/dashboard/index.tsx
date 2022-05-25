@@ -1,11 +1,13 @@
 import Head from "next/head";
+import { useState } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
+import Modal from "react-modal";
 
 import { Header } from "../../components/Header";
+import { ModalOrder } from "../../components/ModalOrder";
+import { setupAPIClient } from "../../services/api";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import styles from "./styles.module.scss";
-import { setupAPIClient } from "../../services/api";
-import { useState } from "react";
 
 type OrderProps = {
   id: string;
@@ -19,10 +21,50 @@ interface HomeProps {
   orders: OrderProps[];
 }
 
+export type OrderItemProps = {
+  id: string;
+  amount: number;
+  order_id: string;
+  product_id: string;
+  product: {
+    id: string;
+    name: string;
+    description: string;
+    price: string;
+    banner: string;
+  };
+  order: {
+    id: string;
+    table: string | number;
+    status: boolean;
+    name: string;
+  };
+};
+
 export default function Dashboard({ orders }: HomeProps) {
   const [orderList, setOrderList] = useState(orders || []);
 
-  function handleOpenModalView() {}
+  const [modalItem, setModalItem] = useState<OrderItemProps[]>();
+  const [modalVisible, setmodalVisible] = useState(false);
+
+  function handleCloseModal() {
+    setmodalVisible(false);
+  }
+
+  async function handleOpenModalView(id: string) {
+    const apiClient = setupAPIClient();
+
+    const response = await apiClient.get("/orders/details", {
+      params: {
+        order_id: id,
+      },
+    });
+
+    setModalItem(response.data);
+    setmodalVisible(true);
+  }
+
+  Modal.setAppElement("#__next");
 
   return (
     <>
@@ -43,7 +85,7 @@ export default function Dashboard({ orders }: HomeProps) {
           <article className={styles.listOrders}>
             {orderList.map((item) => (
               <section key={item.id} className={styles.orderItem}>
-                <button onClick={() => handleOpenModalView()}>
+                <button onClick={() => handleOpenModalView(item.id)}>
                   <div className={styles.tag}></div>
                   <span>Mesa {item.table}</span>
                 </button>
@@ -51,6 +93,8 @@ export default function Dashboard({ orders }: HomeProps) {
             ))}
           </article>
         </main>
+
+        {modalVisible && <ModalOrder />}
       </div>
     </>
   );

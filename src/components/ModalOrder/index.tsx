@@ -8,9 +8,15 @@ interface ModalOrderProps {
   isOpen: boolean;
   onRequestClose: () => void;
   order: OrderItemProps[];
+  handleFinishOrder: (id: string) => void;
 }
 
-export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
+export function ModalOrder({
+  isOpen,
+  onRequestClose,
+  order,
+  handleFinishOrder,
+}: ModalOrderProps) {
   const customStyles = {
     content: {
       top: "50%",
@@ -28,7 +34,7 @@ export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
         type="button"
         onClick={onRequestClose}
         className="react-modal-close"
-        style={{ background: "transparent", border: 0 }}
+        style={{ background: "transparent", border: 0, cursor: "pointer" }}
       >
         <FiX size={45} color="#f34748" />;
       </button>
@@ -36,7 +42,7 @@ export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
       <div className={styles.container}>
         <h2>Detalhes do pedido</h2>
         <span className={styles.table}>
-          <strong>mesa:{order[0].order.table}</strong>
+          <strong>Mesa: {order[0].order.table}</strong>
         </span>
 
         {order.map((item) => (
@@ -49,6 +55,13 @@ export function ModalOrder({ isOpen, onRequestClose, order }: ModalOrderProps) {
             </span>
           </section>
         ))}
+
+        <button
+          className={styles.buttonOrder}
+          onClick={() => handleFinishOrder(order[0].order_id)}
+        >
+          Concluir pedido
+        </button>
       </div>
     </Modal>
   );

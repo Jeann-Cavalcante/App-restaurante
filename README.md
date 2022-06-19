@@ -22,23 +22,12 @@ A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma 
 
 # Como executar o projeto
 
-```bash
-# clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
-
-# entrar na pasta do projeto back end
-cd backend
-
-# executar o projeto
-./mvnw spring-boot:run
-```
-
 ## Front end web
 Pré-requisitos: npm / yarn
 
 ```bash
 # clonar repositório
-git clone https://github.com/Jeann-Cavalcante/management.git
+git clone https://github.com/Jeann-Cavalcante/projeto-restaurante-nextJs-typescript.git
 
 # instalar dependências
 yarn install

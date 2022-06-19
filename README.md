@@ -13,7 +13,7 @@ A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma 
 # Tecnologias utilizadas
 ## Back end
 - NodeJs
-- Espress
+- Express
 - Postgres
 - Prisma
 ## Front end

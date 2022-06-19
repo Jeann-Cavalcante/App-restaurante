@@ -1,14 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sobre o projeto
 
-## Getting Started
+A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma página de cadastro e login com integração ao backend feito em node com typescript, usando prisma como orm e postgres como banco de dados. Os dados são coletados no app mobile pelo garçom, e depois são listados no app web, que também apresenta um dashboard com todos os pedidos, podendo fazer cadastro de produtos e categorias.
 
-First, run the development server:
+## Layout web
+![Web 1](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/login.png)
+
+![Web 2](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/home.png)
+
+![Web 2](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/produto.png)
+
+
+# Tecnologias utilizadas
+## Back end
+- NodeJs
+- Espress
+- Postgress
+- Prisma
+## Front end
+- HTML / CSS / JS / TypeScript
+- Nextjs
+
+# Como executar o projeto
 
 ```bash
-npm run dev
-# or
+# clonar repositório
+git clone https://github.com/devsuperior/sds1-wmazoni
+
+# entrar na pasta do projeto back end
+cd backend
+
+# executar o projeto
+./mvnw spring-boot:run
+```
+
+## Front end web
+Pré-requisitos: npm / yarn
+
+```bash
+# clonar repositório
+git clone https://github.com/Jeann-Cavalcante/management.git
+
+# instalar dependências
+yarn install
+
+# executar o projeto
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Autor
+
+Jean cavalcante
+
+https://www.linkedin.com/in/jean-cavalcante-296245149/
 

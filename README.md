@@ -17,7 +17,7 @@ A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma 
 - Postgres
 - Prisma
 ## Front end
-- HTML / CSS / JS / TypeScript
+- HTML / SASS / JS / TypeScript
 - Nextjs
 
 # Como executar o projeto

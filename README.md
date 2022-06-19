@@ -14,7 +14,7 @@ A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma 
 ## Back end
 - NodeJs
 - Espress
-- Postgress
+- Postgres
 - Prisma
 ## Front end
 - HTML / CSS / JS / TypeScript

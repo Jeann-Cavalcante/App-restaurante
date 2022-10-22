@@ -3,6 +3,8 @@
 A aplicação consiste em gerenciar pedidos feitos em um restaurante, tendo uma página de cadastro e login com integração ao backend feito em node com typescript, usando prisma como orm e postgres como banco de dados. Os dados são coletados no app mobile pelo garçom, e depois são listados no app web, que também apresenta um dashboard com todos os pedidos, podendo fazer cadastro de produtos e categorias.
 
 ## Layout web
+![Web 1](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/Animação.gif)
+
 ![Web 1](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/login.png)
 
 ![Web 2](https://github.com/Jeann-Cavalcante/assets-projects/blob/main/Pizzaria/home.png)
